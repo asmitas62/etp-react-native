@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps,View } from 'react-native';
+import { color, GlobalStyle } from '~/global.css';
 
 type ButtonProps = {
   onPress?: TouchableOpacityProps['onPress'];
@@ -8,33 +9,31 @@ type ButtonProps = {
 
 export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title }, ref) => {
   return (
-    <TouchableOpacity ref={ref} style={styles.button} onPress={onPress}>
+    <View style={styles.buttonContainer} id='buttonContainer'>
+      <TouchableOpacity ref={ref} style={styles.buttonNext} onPress={onPress}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
+    </View>
   );
 });
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#6366F1',
-    borderRadius: 24,
-    elevation: 5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      height: 2,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+  buttonContainer:{
+    paddingTop:10
   },
+  buttonNext:{
+    backgroundColor: color.secendory,
+    width:113,
+    height:40,
+    left:250,
+    borderRadius:7,
+    padding:10,
+},
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     textAlign: 'center',
-  },
+    fontSize: 18,
+    textTransform:'uppercase'
+  }
 });

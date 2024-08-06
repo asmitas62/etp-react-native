@@ -2,7 +2,6 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 import { ImageBackground, View, Text, StyleSheet } from 'react-native';
-const bg = require('../assets/bg2.jpg');
 const StackLayout = () => {
 	const { authState } = useAuth();
 	const segments = useSegments();

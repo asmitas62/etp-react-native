@@ -7,15 +7,27 @@ import {
 	TextInput,
 	TouchableOpacity,
 	View,
-	ImageBackground
+	ImageBackground,
+	FlatList,
+	SafeAreaView
 } from 'react-native';
+import * as globalCss from "../global.css"
 import { useAuth } from '../context/AuthContext';
+import Logo from '~/components/Logo';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button } from '~/components/Button';
+import List from '~/components/List';
+import UIConstant from './constant/UIConstant';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { SafeAreaFrameContext, SafeAreaProvider } from 'react-native-safe-area-context';
 
-const bg = require('../assets/bg2.jpg');
 const Page = () => {
+	const styleCss = globalCss.GlobalStyle;
 	const [username, setUsername] = useState('admin');
 	const [password, setPassword] = useState('admin');
+	const [domainUrl, setDomainUrl] = useState('Https://domain.url.com/')
 	const { onLogin } = useAuth();
+	const proList: {key:string,value:string}[] = UIConstant.UrlPreFixList;
 
 	const onSignInPress = async () => {
 		console.log("dfdfdf",username);
@@ -23,79 +35,36 @@ const Page = () => {
 	};
 
 	return (
-		<KeyboardAvoidingView
-			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-			style={styles.container}> 
-			<ImageBackground source={bg} resizeMode="cover" style={styles.image}> 
-			<View style={styles.formContainer}>
-			<TextInput
+		<View
+		  style={[
+			globalCss.GlobalStyle.container,
+			{
+			  flexDirection: 'column',
+			},
+		  ]}>
+		  <View style={{flex: 1, backgroundColor: globalCss.color.white}} >
+			
+		  </View>
+		  <View style={{flex: 2, backgroundColor: globalCss.color.white}} >
+		  <Logo />
+		  </View>
+		  <KeyboardAvoidingView style={{flex: 3, padding:10,backgroundColor: globalCss.color.white}}>
+		  <TextInput
 				autoCapitalize="none"
 				placeholder="admin"
 				value={username}
 				onChangeText={setUsername}
-				style={styles.inputField}/>
-			<TextInput
-				placeholder="password"
-				value={password}
-				onChangeText={setPassword}
-				secureTextEntry
-				style={styles.inputField}/>
-
-			<TouchableOpacity onPress={onSignInPress} style={styles.button}>
-				<Text style={{ color: '#fff' }}>Sign in</Text>
-			</TouchableOpacity>
-			</View>
-			</ImageBackground>
-		</KeyboardAvoidingView>
-	);
-};
-
-const styles = StyleSheet.create({
-	formContainer:{
-		backgroundColor: "rgb(255, 255, 255) ",
-		borderRadius:15,
-		paddingHorizontal:10,
-		marginHorizontal:10,
-		paddingTop:30,
-		height:"30%",
-	},
-	image: {
+				style={globalCss.GlobalStyle.inputField}/>
+				<Button onPress={onSignInPress} title='Next'></Button>
+			</KeyboardAvoidingView>
+		</View>
+	  );
+	};
+	
+	const styles = StyleSheet.create({
+	  container: {
 		flex: 1,
-		justifyContent: 'center',
-		width: "100%",
-		height: "100%"
-	},
-	circle: {
-		width: 100,
-		height: 100,
-		borderRadius: 100 / 2,
-		backgroundColor: "#111233",
 	  },
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems:"center",
-		backgroundColor:"transparent"
-	},
-	header: {
-		fontSize: 30,
-		textAlign: 'center',
-		marginBottom: 40
-	},
-	inputField: {
-		marginVertical: 8,
-		height: 30,
-		borderWidth: 1,
-		borderColor: '#ccc',
-		borderRadius: 4,
-		padding: 10
-	},
-	button: {
-		marginVertical: 15,
-		alignItems: 'center',
-		backgroundColor: '#111233',
-		padding: 12,
-		borderRadius: 4
-	}
-});
+	});
+
 export default Page;
