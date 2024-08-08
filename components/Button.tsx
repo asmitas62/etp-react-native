@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps,View } from 'react-native';
+import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import { color, GlobalStyle } from '~/global.css';
 
 type ButtonProps = {
@@ -25,15 +26,16 @@ const styles = StyleSheet.create({
     backgroundColor: color.secendory,
     width:113,
     height:40,
-    left:250,
+    left:205,
     borderRadius:7,
     padding:10,
+   
 },
   buttonText: {
     color: '#FFFFFF',
     fontWeight: '700',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 17,
     textTransform:'uppercase'
   }
 });

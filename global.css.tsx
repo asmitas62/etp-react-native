@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 import { Container } from "./components/Container";
 export const color = {
     dark:"#030b17",
-    primary:"#092144",
-    secendory:"#0f3771",
+    primary:"#23395d",
+    secendory:"#3f66a7",
     ternary:"#154d9e",
     success:"#caffca",
     danger:"#ffb5b5",
@@ -29,8 +29,8 @@ export const GlobalStyle = StyleSheet.create({
         margin:16
     },
     logoImage:{
-        width:50,
-        height:50,
+        width:290,
+        height:70,
         borderRadius:3,
     },
     logoView:{
@@ -41,7 +41,7 @@ export const GlobalStyle = StyleSheet.create({
         // alignItems: "baseline",
         textAlign: "center",
         verticalAlign: "bottom",
-        fontSize:34,
+        fontSize:28,
         paddingTop:18
     },
     logoTextSm:{
@@ -52,8 +52,16 @@ export const GlobalStyle = StyleSheet.create({
         color:color.white,
         height:50,
         borderRadius:4,
-        padding:6,
+        padding:12,
         fontSize:17,
-        fontWeight:"700"
-    }    
+        fontWeight:"600",
+        
+    },
+    footer:{
+		bottom:0,
+		position:'absolute',
+        left:130
+		
+	  },
+
 });

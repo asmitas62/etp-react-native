@@ -8,7 +8,7 @@ export enum Role {
 
 interface AuthProps {
 	authState: { authenticated: boolean | null; username: string | null; role: Role | null };
-	onLogin: (username: string, password: string) => void;
+	onLogin: (username: string, password: string, employeeCode: string) => void;
 	onLogout: () => void;
 }
 
@@ -29,14 +29,14 @@ export const AuthProvider = ({ children }: any) => {
 		role: null
 	});
 
-	const login = (username: string, password: string) => {
-		if (username === 'admin' && password === 'admin') {
+	const login = (username: string, password: string, employeeCode: string) => {
+		if (username === 'admin' && password === 'admin' && employeeCode ==='admin') {
 			setAuthState({
 				authenticated: true,
 				username: username,
 				role: Role.ADMIN
 			});
-		} else if (username === 'user' && password === 'user') {
+		} else if (username === 'user' && password === 'user' && employeeCode==='user') {
 			setAuthState({
 				authenticated: true,
 				username: username,
