@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as globalCss from "../global.css";
-import { Button } from '~/components/Button';
 import { useAuth } from '../context/AuthContext';
 import UIConstant from './constant/UIConstant';
-
+import {ApplicationProvider, Button} from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
 export default function LoginPageScreen() {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -25,11 +25,12 @@ export default function LoginPageScreen() {
 };
 
   return (
+    <ApplicationProvider {...eva} theme={eva.light}>
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Password"
-          placeholderTextColor={globalCss.color.white}
+          placeholderTextColor={globalCss.color.danger}
           secureTextEntry={!passwordVisible}
           maxLength={20}
           value={password}
@@ -43,9 +44,12 @@ export default function LoginPageScreen() {
             color="gray"
           />
         </TouchableOpacity>
-        <Button title='Login' onPress={onSignInPress}></Button>
+        {/* <Button title='Login' onPress={onSignInPress}></Button> */}
+        <Button appearance='outline' status='primary' onPress={onSignInPress} style={styles.btn}>Login</Button>
+
       </View>
     </View>
+    </ApplicationProvider>
   );
 }
 
@@ -69,5 +73,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10, 
     top: 10,
+  },
+  btn:{
+    margin:20,
+    width:150,
+    justifyContent:'center',
+    left:150
   },
 });

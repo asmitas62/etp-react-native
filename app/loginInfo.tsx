@@ -45,12 +45,14 @@ export default function LoginInfoPage(){
 		  <TextInput
 				autoCapitalize="none"
 				placeholder="Enter Employee Code"
+                placeholderTextColor={globalCss.color.danger}
                 maxLength={20} 
                 value={employeeCode}
                 onChangeText={setEmployeeCode}
 				style={[globalCss.GlobalStyle.inputField,styles.input]}/>
             <TextInput
              placeholder="Enter Company Code"
+             placeholderTextColor={globalCss.color.danger}
              maxLength={20}
              value={companyCode}
              onChangeText={setCompanyCode}
@@ -99,7 +101,8 @@ const styles = StyleSheet.create({
         
     },
     button:{
-        top:100,
+      top:40,
+      right:2
     },
     iconContainer: {
         position: 'absolute',

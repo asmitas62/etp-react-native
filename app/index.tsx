@@ -64,6 +64,7 @@ const Page = () => {
 		  <TextInput
 				autoCapitalize="none"
 				placeholder="Please Provide API URL"
+				placeholderTextColor={globalCss.color.danger}
 				maxLength={30}
 				value={domainUrl}
 				onChangeText={setDomainUrl}
