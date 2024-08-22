@@ -1,6 +1,9 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useAuth, Role } from '../../context/AuthContext';
 import WithRole from '../../components/WithRole';
+import { Layout } from '@ui-kitten/components';
+import * as globalCss from "../../global.css";
+const styleCss = globalCss.styles;
 
 const Page = () => {
 	const { authState, onLogout } = useAuth();
@@ -8,9 +11,9 @@ const Page = () => {
 	const onLogoutPressed = () => {
 		onLogout!();
 	};
-
 	return (
-		<View style={styles.container}>
+		<Layout style={styleCss.container}>
+			<View style={styleCss.containerDashboard} >
 			<Text style={styles.title}>Home</Text>
 			<Text style={styles.title}>Role: {authState?.role}</Text>
 			<Button title="Logout" onPress={onLogoutPressed} />
@@ -19,11 +22,8 @@ const Page = () => {
 			<WithRole role={Role.ADMIN}>
 				<Text>Only visible for admins</Text>
 			</WithRole>
-
-			<WithRole role={Role.USER}>
-				<Text>Only visible for users</Text>
-			</WithRole>
 		</View>
+		</Layout>
 	);
 };
 

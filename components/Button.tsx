@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
+import * as globalCss from "../global.css";
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps,View } from 'react-native';
 import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
-import { color, GlobalStyle } from '~/global.css';
-
+const styleCss = globalCss.styles;
 type ButtonProps = {
   onPress?: TouchableOpacityProps['onPress'];
   title?: string;
@@ -23,19 +23,18 @@ const styles = StyleSheet.create({
     paddingTop:10
   },
   buttonNext:{
-    backgroundColor: color.secendory,
-    width:113,
-    height:40,
-    left:205,
-    borderRadius:7,
-    padding:10,
+    // backgroundColor:"#090909" ,
+    // width:113,
+    // height:40,
+    // left:205,
+    // borderRadius:7,
+    // padding:10,
    
 },
   buttonText: {
-    color: '#FFFFFF',
-    fontWeight: '700',
-    textAlign: 'center',
-    fontSize: 17,
-    textTransform:'uppercase'
+    // fontWeight: '700',
+    // textAlign: 'center',
+    // fontSize: 17,
+    // textTransform:'uppercase'
   }
 });

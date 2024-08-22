@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useState } from 'react';
+import { Children, createContext, useContext, useReducer, useState } from 'react';
 import {Text} from 'react-native';
 
 export enum Role {
@@ -8,11 +8,13 @@ export enum Role {
 
 interface AuthProps {
 	authState: { authenticated: boolean | null; username: string | null; role: Role | null };
-	onLogin: (username: string, password: string, employeeCode: string) => void;
+	onLogin: (username: string, password: string, companyCode: string,domainUrl: string) => void;
+	onDomainUpdate: (username: string, password: string, employeeCode: string, domainUrl: string)=>void;
 	onLogout: () => void;
 }
 
 const AuthContext = createContext<Partial<AuthProps>>({});
+const AuthDispatcherContext = createContext(null);
 
 export const useAuth = () => {
 	return useContext(AuthContext);
@@ -55,8 +57,18 @@ export const AuthProvider = ({ children }: any) => {
 		});
 	};
 
+	const domain = async (username: string, password: string, employeeCode: string, domainUrl: string) => {
+		setAuthState({
+			authenticated: false,
+			username: null,
+			role: null
+		});
+	};
+
+
 	const value = {
 		onLogin: login,
+		onDomainUpdate: domain,
 		onLogout: logout,
 		authState
 	};

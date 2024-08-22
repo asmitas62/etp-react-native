@@ -1,44 +1,41 @@
-import { StyleSheet } from "react-native";
-import { Container } from "./components/Container";
-export const color = {
-    dark:"#030b17",
-    primary:"#23395d",
-    secendory:"#3f66a7",
-    ternary:"#154d9e",
-    success:"#caffca",
-    danger:"#ffb5b5",
-    warning:"#ffff9f",
-    skyblue:"#bfe5f4",
-    darkGreen:"#02563d",
-    lightpink:"#660000",
-    orangeLight:"#660000",
-    white:"#ffffff"
-
-};
-export const GlobalStyle = StyleSheet.create({
-    // wraper:{
-    //     backgroundColor:color.secendory,
-    // },
+import { default as etptheme } from 'etp.theme.json';
+import { useTheme, useStyleSheet, StyleService } from '@ui-kitten/components';
+const theme = useTheme();
+const themedStyles = StyleService.create({
     container:{
         flex: 1,
+        flexDirection: 'column'
+    },
+    containerContent:{
+        flex: 2, justifyContent: 'flex-end', alignItems: 'center'
+    },
+    containerDashboard:{
+         flex: 2, justifyContent: 'space-evenly', alignItems: 'center'
+    },
+    containerLoginContent:{
+        flex: 2, justifyContent: 'flex-end',
+        textAlign:"left"
+    },
+    containerHeading:{
+    flex: 2, 
+   justifyContent: 'flex-start', 
+    textAlign: "left"
     },
     innerContainer:{
-        backgroundColor:color.secendory,
-        flex:1,
-        color:color.white,
-        margin:16
+        flex:3, justifyContent: 'flex-start', alignItems: 'center' ,paddingTop:"40%",position:"relative"
+    },
+    innerLoginContainer:{
+        flex:3, justifyContent: 'flex-start', paddingTop:"30%",position:"relative"
     },
     logoImage:{
-        width:290,
-        height:70,
-        borderRadius:3,
+        width:100,
+        height:100,
     },
     logoView:{
     },
     logoText:{
-        color: color.primary,
+        color: 'color-primary-500',
         fontWeight:"500",
-        // alignItems: "baseline",
         textAlign: "center",
         verticalAlign: "bottom",
         fontSize:28,
@@ -48,8 +45,8 @@ export const GlobalStyle = StyleSheet.create({
         fontSize:11,
    },
     inputField:{
-        backgroundColor:color.primary,
-        color:color.white,
+        backgroundColor:'color-primary-500',
+        color:'color-primary-500',
         height:50,
         borderRadius:4,
         padding:12,
@@ -61,7 +58,26 @@ export const GlobalStyle = StyleSheet.create({
 		bottom:0,
 		position:'absolute',
         left:130
-		
-	  },
+    },
+      captionText: {
+        fontSize: 12,
+        fontWeight: '400',
+        color: etptheme["color-danger-500"],
+      },
+      bgPrimary:{
+        backgroundColor:etptheme['color-primary-400'],
+        color:etptheme['color-basic-100'],
+        width:"100%",
+        margin:10
+      },
+      fullWithButton:{
+        width:"100%",
+        marginRight:10,
+        marginLeft:10,
+        marginTop:10,
+        justifyContent:"center",
+		alignSelf:"center"
+      }
 
 });
+export const styles = useStyleSheet(themedStyles);
