@@ -1,64 +1,97 @@
 import React, { ComponentProps, ReactElement } from 'react';
+import {  ImageProps, StyleSheet } from 'react-native'
 import { BottomNavigation, BottomNavigationTab, IconElement ,Icon,IconProps} from '@ui-kitten/components';
+import { router } from 'expo-router';
+const shakeIconRef = React.useRef<Icon<Partial<ImageProps>>>();
 const PersonIcon = (props:ComponentProps<IconProps>): IconElement => (
-  <Icon 
-    {...props}
-    name='person'
-  />
-);
-
-const PeopleIcon = (props:ComponentProps<IconProps>): IconElement => (
   <Icon
-  {...props}
-    name='people'
+    {...props}
+    style={styles.icon}
+    fill='#257F97'
+    name='home'
   />
 );
 
 const InboxIcon = (props:ComponentProps<IconProps>): IconElement => (
   <Icon
   {...props}
-    name='email'
+  style={styles.icon}
+  fill='#257F97'
+  name='email'
+  />
+);
+
+const TeamIcon = (props:ComponentProps<IconProps>): IconElement => (
+  <Icon
+  {...props}
+  style={styles.icon}
+  fill='#257F97'
+  name='people-outline'
   />
 );
 
 const MoreIcon = (props:ComponentProps<IconProps>): IconElement => (
   <Icon {...props}
+  fill='#257F97'
+    style={styles.icon}
     name='more-horizontal'
   />
 );
 const PlusIcon = (props:ComponentProps<IconProps>): IconElement => (
   <Icon {...props}
-    name='plus'
+    name='plus-outline'
+    ref={shakeIconRef}
+    fill='#FFFFFF'
+    style={styles.icon}
     animation='shake' 
   />
 );
 
-export const TabBottom = (): React.ReactElement => {
+export const TabBottom = ({navigation,state}:any): React.ReactElement => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
+  const handleNavigation= (index:any)=>{
+    console.log('tab index', index,state.routeNames )
+    navigation.navigate(state.routeNames[index]);
+  }
   return (
-    <BottomNavigation id='tabs'   appearance='noIndicator' style={{position:"static", bottom:"-2%"}}
-      selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}
-    >
-      <BottomNavigationTab appearance='primary'
-        icon={PersonIcon}
+    <BottomNavigation id='tabs'   appearance='noIndicator' 
+    style={{position:"static",height:70, bottom:"-3%",}}
+      selectedIndex={selectedIndex} 
+      onSelect={(index) => handleNavigation(index)}>
+      {/* <BottomNavigationTab title='ORDERS'  appearance='primary'/>
+      <BottomNavigationTab title='USERS'  appearance='primary' /> */}
+
+      <BottomNavigationTab appearance='primary' 
+        icon={PersonIcon} style={styles.tabContainer}
+        
       />
-      <BottomNavigationTab appearance='primary'
+      <BottomNavigationTab appearance='primary' 
         icon={InboxIcon}
-        style={{marginRight:"23%"}}
+        style={[styles.tabContainer,{marginRight:"20%"}]}
       />
-      <BottomNavigationTab appearance='primary'
+      <BottomNavigationTab appearance='primary' 
         icon={ PlusIcon}
-         style={{width:55, height:57 , position:"absolute",left:"43%",bottom:"50%",borderRadius:50,borderColor:"#FFFFFF", borderStyle: 'solid',borderWidth:3,backgroundColor:"#257F97"}}
+         style={{width:55, height:57 , position:"absolute",left:"43%",bottom:"50%",borderRadius:50,borderColor:"#FFFFFF", borderStyle: 'solid',borderWidth:4,backgroundColor:"#257F97"}}
       />
-      <BottomNavigationTab appearance='primary'
-      icon={PeopleIcon}
+      <BottomNavigationTab appearance='primary' 
+      icon={TeamIcon}
+      style={styles.tabContainer}
     />
-      <BottomNavigationTab appearance='primary'
+      <BottomNavigationTab appearance='primary' 
         icon={MoreIcon}
+        style={styles.tabContainer}
       />
     </BottomNavigation>
   );
 };
+const styles = StyleSheet.create({
+  tabContainer:{
+    marginBottom:"3%", 
+  },
+  icon: {
+    width: 20,
+    height: 20,
+  }
+})

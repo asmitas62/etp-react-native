@@ -2,7 +2,7 @@
     "$schema": "./node_modules/@eva-design/dss/schema/schema.json",
     "version": 1.0,
     "strict": {
-      "text-font-family": "System",
+      "text-font-family": "dosis-regular",
   
       "text-heading-1-font-size": 36,
       "text-heading-1-font-weight": "800",
@@ -307,7 +307,7 @@
             "mapping": {
               "minHeight": 56,
               "paddingVertical": 4,
-              "backgroundColor": "color-primary-400",
+              "backgroundColor": "color-basic-400",
               "indicatorHeight": 4,
               "indicatorBackgroundColor": "color-primary-default"
             }
@@ -316,8 +316,7 @@
             "mapping": {
               "indicatorHeight": 0,
               "indicatorBackgroundColor": "transparent",
-              "backgroundColor": "color-primary-400",
-              "color":"color-basic-default"
+              "backgroundColor": "color-tab-background"
             }
           }
         }

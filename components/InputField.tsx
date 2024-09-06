@@ -1,69 +1,86 @@
-import React from 'react';
-import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
-import { Icon, IconElement, Input, Text } from '@ui-kitten/components';
-
-const AlertIcon = (): IconElement => (
-  <Icon 
-    name='alert-circle-outline'
-  />
-);
-
-export const InputAccessoriesShowcase = (): React.ReactElement => {
-
-  const [value, setValue] = React.useState('');
-  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
-
-  const toggleSecureEntry = (): void => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const renderIcon = (): React.ReactElement => (
-    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-      <Icon
-        name={secureTextEntry ? 'eye-off' : 'eye'}
-      />
-    </TouchableWithoutFeedback>
-  );
-
-  const renderCaption = (): React.ReactElement => {
-    return (
-      <View style={styles.captionContainer}>
-        {AlertIcon()}
-        <Text style={styles.captionText}>
-Should contain at least 8 symbols
-        </Text>
-      </View>
-    );
-  };
-
-  return (
-    <Input
-      value={value}
-      label='Password'
-      placeholder='Place your Text'
-      caption={renderCaption}
-      accessoryRight={renderIcon}
-      secureTextEntry={secureTextEntry}
-      onChangeText={nextValue => setValue(nextValue)}
-    />
-  );
+import React, { useCallback } from "react";
+import { useFormikContext, useField } from "formik";
+import { Input, Text } from "@ui-kitten/components";
+import PropTypes from "prop-types";
+import * as globalCss from "../global.css";
+import { View, StyleSheet } from "react-native";
+const styleCss = globalCss.styles;
+TextField.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  secure: PropTypes.bool,
 };
 
+export default function TextField({ name, label, secure = false, ...props }:any) {
+  const [field, meta] = useField('name');
+  const { setFieldValue, setFieldTouched, handleBlur } = useFormikContext();
+
+  const handleType = useCallback(
+    (text:string) => {
+      setFieldValue('name', text);
+    },
+    [name]
+  );
+
+  const handleFocus = () => {
+    setFieldTouched('name');
+  };
+  const handleCaption = () =>{
+    if(meta.initialTouched){
+      return renderCaption("touched");
+    }
+  }
+  const handleStatus =() =>{
+    if(meta.touched){
+      return "danger";
+    }else{
+      return "primary"
+    }
+  }
+
+  const renderCaption = (props: string): React.ReactElement => {
+    return (
+        <View style={styles.captionContainer}>
+            <Text style={styleCss.captionText}>
+                {props}
+            </Text>
+        </View>
+    );
+};
+const handlePlaceholder =(label:string)=>{
+  return "Please Provide "+label;
+}
+  return (
+    <Input
+      style={styles.input}
+      status={()=>handleStatus}
+      value={String(field.value)}
+      label={label}
+      caption={()=>handleCaption()}
+      secureTextEntry={secure}
+      onBlur={handleBlur(name)}
+      onFocus={handleFocus}
+      onChangeText={handleType}
+      {...props}
+    />
+  );
+}
+
 const styles = StyleSheet.create({
+  input: {
+      marginLeft: 10,
+      marginRight: 10,
+      marginBottom: 15
+  },
+  button: {
+      justifyContent: "flex-start",
+      alignSelf: "flex-end",
+      marginRight: 10,
+      top: 10 
+  },
   captionContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  captionIcon: {
-    width: 10,
-    height: 10,
-    marginRight: 5,
-  },
-  captionText: {
-    fontSize: 12,
-    fontWeight: '400',
-    fontFamily: 'opensans-regular',
-    color: '#8F9BB3',
-  },
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+  }
 });
