@@ -1,45 +1,38 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { Layout } from '@ui-kitten/components';
 import * as globalCss from "../../global.css";
 import { router, useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
-import Header from '~/components/HeaderScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CalendarView } from '~/components/CalenderUI';
+import LeaveBalanceView from '~/components/LeaveBalance';
+import { Header } from '~/components/HeaderScreen';
 const styleCss = globalCss.styles;
 
 const Page = () => {
-	const [userName, setUserName] = useState("User");
 	const navigation = useNavigation();
-	AsyncStorage.getItem('employeeData').then(data=>{
-		if(data){
-		setUserName(data);
-		}
-	});
 	useEffect(() => {
-	  navigation.setOptions({ headerTitle: '',headerBackTitle:'',  headerTransparent: true });
+		navigation.setOptions({ headerTitle: '', headerBackTitle: '', headerTransparent: true });
 	}, [navigation]);
 	const { authState, onLogout } = useAuth();
 
 	const onLogoutPressed = () => {
 		onLogout!();
 	};
-	return (
-		<Layout style={styleCss.container}>
-			<View style={{flex:1}}><Header name={userName}/></View>
-			<View style={styleCss.calenderView}><CalendarView/></View>
-			<View style={styleCss.containerDashboard} >
-			<View style={styles.separator} />
-		</View>
+	
+return (
+	<ScrollView scrollEnabled={true} overScrollMode="auto" >
+	<Layout style={styleCss.container} level='2'>
+		<Layout style={styles.layoutCalender} level='2'><Header/></Layout>
+		<Layout style={styles.layoutCalender} level='2'><CalendarView /></Layout>
+		<Layout style={styles.layoutCalender} level='2'><LeaveBalanceView /></Layout>
+		<Layout style={styles.layoutCalender} level='2'><LeaveBalanceView /></Layout>
+		<Layout style={styles.layout} level='2'></Layout>
 		<Button title="Logout" onPress={onLogoutPressed} />
-
-		</Layout>
-	);
+	</Layout></ScrollView>
+)
 };
-
 export default Page;
-
 const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
@@ -54,5 +47,13 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		fontWeight: 'bold'
+	},
+	layout: {
+		flex: 1,
+		position:"absolute"
+		// alignItems: 'center',
+	},
+	layoutCalender:{
+		position:"static",
 	}
 });

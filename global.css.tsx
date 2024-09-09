@@ -5,8 +5,20 @@ const themedStyles = StyleService.create({
     container:{
         flex: 1,
         flexDirection: 'column',
-        backgroundColor:"#FFFFFF",
+        maxHeight:900,
+        paddingTop:20     
+        // backgroundColor:"#FFFFFF",
     },
+    Layout1:{
+      flex: 1,
+      flexDirection: 'column',
+      // backgroundColor:"#FFFFFF",
+  },
+  Layout2:{
+    flex:2,
+    flexDirection: 'column',
+    // backgroundColor:"#FFFFFF",
+},
     containerheader:{
       flex: 1,
       flexDirection: 'row'
@@ -16,7 +28,9 @@ const themedStyles = StyleService.create({
     },
     containerDashboard:{
          flex: 4,
-         justifyContent: 'space-evenly'
+         justifyContent: 'space-evenly',
+         top:60,
+         margin:20,
     },
     containerLoginContent:{
         flex: 2, justifyContent: 'flex-end',
@@ -102,7 +116,7 @@ const themedStyles = StyleService.create({
       },
       calenderView:{
         flex:2,
-        top:-14,
+        top:-24,
         margin:20,
         height:350,
         width:400

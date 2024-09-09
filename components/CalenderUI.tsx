@@ -1,9 +1,7 @@
-import React from 'react';
-import { Calendar, Layout, StyleType, Text } from '@ui-kitten/components';
+import React, { ReactElement } from 'react';
+import { Calendar,Button, Layout, StyleType, Text, TopNavigation, TopNavigationAction, Divider } from '@ui-kitten/components';
 import { CalendarDateInfo } from '@ui-kitten/components/ui/calendar/type';
 import { StyleProp, View, StyleSheet, ViewStyle } from 'react-native';
-import { MomentDateService } from "@ui-kitten/moment";
-import moment from "moment";
 import * as globalcss from './../global.css'
 export const CalendarView = (): React.ReactElement => {
   const renderDay = (
@@ -24,14 +22,27 @@ export const CalendarView = (): React.ReactElement => {
       </View>
     );
   };
+  
+  const renderOverflowMenuAction = (): React.ReactElement => (
+    <Button style={{marginRight:12}}
+    appearance='ghost'
+    status='primary'
+  >
+    GO TO CALENDER
+  </Button>
+  );
+  const renderHeading = (): React.ReactElement => (
+    <Text category='s1'>CALENDER</Text>
+  );
 
   const renderFooter= () =>{
-    return (<><View>
+    return (<>
+      <Divider/>
         <Layout
     style={themedStyles.footerLayout}
     level='1'
   >
-    <Text style={globalcss.styles.dotPrimary} status='primary'>.</Text>
+    <Text style={globalcss.styles.dotPrimary} status='primary'></Text>
     <Text
       style={themedStyles.textFooter}
       status='primary'>Primary</Text>
@@ -54,19 +65,17 @@ export const CalendarView = (): React.ReactElement => {
       status='success'
     >success</Text>
     </Layout>
-        </View></>);
+       </>);
   }
-
-  
 
   return (
     <>
-      <Text category='s1' status='default' style={{marginBottom:5,borderColor:"#BBB",borderBottomWidth:2,borderStyle:"solid"}}>Calender</Text>
-      <Calendar
+    <TopNavigation title={renderHeading}  accessoryRight={renderOverflowMenuAction}/>
+    <Layout level='1' style={themedStyles.layoutCantainer} ><Calendar
         date={new Date()}
         renderDay={(info: CalendarDateInfo<Date>, style: StyleType)=>renderDay(info,style)}
         renderFooter={renderFooter}
-      />
+      /></Layout>
     </>
   );
 };
@@ -108,6 +117,10 @@ const themedStyles = StyleSheet.create({
     },   
     textFooter:{
         marginRight:10,
+    },
+    layoutCantainer:{
+      marginLeft:20,
+      marginRight:20,
+
     }
-        
   });

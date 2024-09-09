@@ -1,36 +1,44 @@
 import { View, StyleSheet } from 'react-native'
-import React from 'react'
-import { Icon, Layout, Text } from '@ui-kitten/components';
+import React, { useEffect, useState } from 'react'
+import { Button, Icon, Layout, Text, TopNavigation } from '@ui-kitten/components';
 import * as globalCss from 'global.css';
-import { G } from 'react-native-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Header = ({ name }: any) => {
+export const Header = (): React.ReactElement => {
     const gCss = globalCss.styles;
-    return (<Layout style={styles.container}>
-            <Layout
-                style={styles.layout}
-                level='1'
-            >
-                <Text category='h3' status='primary'>Hi {name}!</Text>
-            </Layout>
-            <Layout style={styles.layoutRight} level='1'>
-                <View><Icon
-                    fill='#257F97'
-                    style={styles.icon}
-                    name='search'
-                /></View>
-                <Icon
-                    fill='#257F97'
-                    style={styles.icon}
-                    name='bell'
-                />
-                <Icon
-                    fill='#257F97'
-                    style={styles.icon}
-                    name='settings' />
-            </Layout>
-        </Layout>
-    )
+    const [userName, setUserName] = useState('');
+    useEffect(() => {
+		AsyncStorage.getItem('employeeData').then(data => {
+			if (data) {
+			console.log("username",data);
+			setUserName(data);
+			}});
+	},[userName]);
+      
+  const renderOverflowMenuAction = (): React.ReactElement => (
+    <Layout style={styles.layoutRight} level='2'>
+    <View><Icon
+        fill='#257F97'
+        style={styles.icon}
+        name='search'
+    /></View>
+    <Icon
+        fill='#257F97'
+        style={styles.icon}
+        name='bell'
+    />
+    <Icon
+        fill='#257F97'
+        style={styles.icon}
+        name='settings' />
+</Layout>
+  );
+  const renderHeading = (): React.ReactElement => (
+    <Text category='h4' status='primary'>Hi {userName} !</Text>
+  );
+
+    return (<><TopNavigation accessoryLeft={renderHeading} style={{marginTop: 20,marginLeft:5,marginRight:10}}  accessoryRight={renderOverflowMenuAction}/>
+          </>)
 }
 const styles = StyleSheet.create({
     container: {
@@ -41,10 +49,9 @@ const styles = StyleSheet.create({
     },
     layout: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        height: 40,
-        paddingLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft:40
 
 
     },
@@ -53,15 +60,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: "flex-end",
         height: 40,
-        paddingRight: 0,
-        flexDirection:"row",
-        flexWrap:'wrap'
+        marginRight: "25%",
+        flexDirection: "row",
+        flexWrap: 'wrap',
+        marginTop:15
 
     },
     icon: {
         width: 20,
         height: 20,
-        marginRight:7
+        marginRight: 7
     }
 });
-export default Header;

@@ -6,7 +6,7 @@ import { default as thememapping } from '../../theme-mapping.json';
 import { ThemeContext } from '~/theme.context';
 import { useAuth } from '~/context/AuthContext';
 import { TabBottom } from '~/components/TabBottom';
-import { View } from 'react-native';
+import { View,StyleSheet,ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -19,7 +19,7 @@ const UsersScreen = () => (
 );
 
 const Users1Screen = () => (
-	<Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+	<Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} level='2'>
 		<Text category='h1'>USERS</Text>
 	</Layout>
 );
@@ -56,8 +56,9 @@ const DrawerLayout = () => {
 	return (
 		<ThemeContext.Provider value={{ theme, toggleTheme }}>
 			<ApplicationProvider {...eva} customMapping={mapping} theme={{ ...eva.light, ...etptheme }} >
-				<Layout style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end",backgroundColor: "#FFFFFF"  }}>
-					<View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: "#FFFFFF" }}>
+				<Layout level='2' style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
+				
+					<View style={{ flex: 1, justifyContent: "flex-end"}}>
 						<TabNavigator />
 					</View>
 				</Layout>
@@ -65,4 +66,18 @@ const DrawerLayout = () => {
 		</ThemeContext.Provider>
 	);
 };
+const styles = StyleSheet.create({
+	container: {
+	  flex: 1,
+	},
+	scrollView: {
+	  backgroundColor: 'pink',
+	  width:4
+	},
+	text: {
+	  fontSize: 42,
+	},
+  });
 export default DrawerLayout;
+
+
