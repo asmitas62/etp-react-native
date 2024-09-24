@@ -1,5 +1,5 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
-import Loader from '~/components/LoaderScreen';
+import Loader from '../components/LoaderScreen';
 export const useLoader = ()=>{
     const context = useContext(LoaderContext);
       if (!context) {

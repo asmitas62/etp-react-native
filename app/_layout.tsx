@@ -1,26 +1,26 @@
 import { Stack, useRouter, useSegments } from 'expo-router';
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { useEffect } from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import React from 'react';
 import { default as etptheme } from 'etp.theme.json';
 import { default as thememapping } from '../theme-mapping.json';
-import { ThemeContext } from '~/theme.context';
+import { ThemeContext } from 'theme.context';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { View } from 'react-native';
-import Loader from '~/components/LoaderScreen';
-import { LoaderProvider } from '~/context/LoaderContext';
+import Loader from './components/LoaderScreen';
+import { LoaderProvider } from './context/LoaderContext';
 import Toast from 'react-native-toast-message';
 
 const StackLayout = () => {
 	const { authState } = useAuth();
-	const { onPpersistLogin } = useAuth();
+	const { onPersistLogin } = useAuth();
 	const segments = useSegments();
 	const router = useRouter();
 
 	useEffect(() => {
-		onPpersistLogin!();
+		onPersistLogin!();
 		console.log('auth-1', authState);
 		const inAuthGroup = segments[0] === '(protected)';
 		console.log('auth-sss', inAuthGroup);
@@ -28,6 +28,7 @@ const StackLayout = () => {
 			console.log('auth-ss', authState);
 			router.navigate("/");
 		} else if (authState?.authenticated) {
+			console.log('auth-login success', inAuthGroup);
 			router.replace('/(protected)');
 		}
 	}, [authState]);
@@ -35,7 +36,7 @@ const StackLayout = () => {
 	return (<>
 		<Stack initialRouteName='index'>
 			<Stack.Screen name="index" options={{ headerShown: false }} />
-			<Stack.Screen name="(protected)" options={{ headerShown: false }} redirect={authState?.authenticated===null}/>
+			<Stack.Screen name="(protected)" options={{ headerShown: false }} redirect={authState?.authenticated === null}/>
 		</Stack></>
 	);
 };
@@ -55,7 +56,7 @@ export default function RootLayoutNav() {
 					<LoaderProvider>
 						<AuthProvider>
 							<StackLayout />
-    <Toast position='bottom'  />
+    						<Toast position='bottom'  />
 
 						</AuthProvider>
 						</LoaderProvider>

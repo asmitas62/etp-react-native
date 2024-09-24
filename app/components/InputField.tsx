@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useFormikContext, useField } from "formik";
 import { Input, Text } from "@ui-kitten/components";
 import PropTypes from "prop-types";
-import * as globalCss from "../global.css";
+import * as globalCss from "global.css";
 import { View, StyleSheet } from "react-native";
 const styleCss = globalCss.styles;
 TextField.propTypes = {

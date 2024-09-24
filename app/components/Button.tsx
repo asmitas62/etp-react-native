@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import * as globalCss from "../global.css";
+import * as globalCss from "global.css";
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps,View } from 'react-native';
 import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 const styleCss = globalCss.styles;

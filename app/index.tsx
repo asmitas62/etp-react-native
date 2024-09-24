@@ -1,13 +1,10 @@
-import * as globalCss from "../global.css";
-import Logo from '~/components/Logo';
+import * as globalCss from "global.css";
+import Logo from './components/Logo';
 import { Button, Layout, Text } from "@ui-kitten/components";
 import { KeyboardAvoidingView, View, StyleSheet } from "react-native";
 import { router, useNavigation } from "expo-router";
 import { useEffect } from "react";
 import FooterMain from "./FooterMain";
-import Loader from "~/components/LoaderScreen";
-import showToast from "~/components/ToastMessage";
-import Toast from "react-native-toast-message";
 const  Page = () => {
   const navigation = useNavigation();
 

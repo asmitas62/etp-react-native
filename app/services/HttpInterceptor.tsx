@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosInstance } from 'axios';
 import Toast from 'react-native-toast-message';
-import showToast from '~/components/ToastMessage';
+import showToast from '../components/ToastMessage';
 
 const baseURL = 'https://testapi.etpcloud.in/test';
 
@@ -13,15 +13,18 @@ const axiosInstance:AxiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (config) => {
     console.log("cofig-",config);
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('accessToken');
+    const baseApiURL = await AsyncStorage.getItem('apiUrl');
     const clientDomain = await AsyncStorage.getItem('ClientDomain');
-    if (token && clientDomain) {
+    if (token && clientDomain && baseApiURL) {
+      config.baseURL=baseApiURL;
       config.headers.Authorization = `Bearer ${token}`;
       config.headers.Accept = "application/json";
       config.headers.DeviceInfo= "YTAxczFlLTAxZDUwLTFkc2RzNH5BbmRyb2lkLTEwLE5va2lhIDguMH41OC42MzUyLH40NS40NTQwNTQg";
       config.headers.ClientDomain= clientDomain;
-    }
     console.log("cofig updated-",config);
+
+    }
     return config;
   },
   (error) => {

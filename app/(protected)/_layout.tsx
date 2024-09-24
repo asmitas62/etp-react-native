@@ -1,17 +1,20 @@
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { ApplicationProvider, Button, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
 import { default as etptheme } from 'etp.theme.json';
 import { default as thememapping } from '../../theme-mapping.json';
-import { ThemeContext } from '~/theme.context';
-import { useAuth } from '~/context/AuthContext';
-import { TabBottom } from '~/components/TabBottom';
-import { View,StyleSheet,ScrollView, SafeAreaView, StatusBar } from 'react-native';
-import { Stack, useRouter, useSegments } from 'expo-router';
-import { NavigationContainer } from '@react-navigation/native';
+import { ThemeContext } from 'theme.context';
+import { useAuth } from '../context/AuthContext';
+import { TabBottom } from '../components/TabBottom';
+import { View,StyleSheet } from 'react-native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Page from '../(protected)/index';
+
 const { Navigator, Screen } = createBottomTabNavigator();
+const { authState, onLogout } = useAuth();
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
+	
 const UsersScreen = () => (
 	<Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 		<Text category='h1'>USERS</Text>
@@ -19,8 +22,10 @@ const UsersScreen = () => (
 );
 
 const Users1Screen = () => (
+	
 	<Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} level='2'>
-		<Text category='h1'>USERS</Text>
+		<Text category='h1'>USERS login</Text>
+		<Button onPress={onLogout}>Logout</Button>
 	</Layout>
 );
 
@@ -54,6 +59,7 @@ const DrawerLayout = () => {
 		setTheme(nextTheme);
 	};
 	return (
+		<Provider store={store}>
 		<ThemeContext.Provider value={{ theme, toggleTheme }}>
 			<ApplicationProvider {...eva} customMapping={mapping} theme={{ ...eva.light, ...etptheme }} >
 				<Layout level='2' style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
@@ -64,6 +70,7 @@ const DrawerLayout = () => {
 				</Layout>
 			</ApplicationProvider>
 		</ThemeContext.Provider>
+		</Provider>
 	);
 };
 const styles = StyleSheet.create({

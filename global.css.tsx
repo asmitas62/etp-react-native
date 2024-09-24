@@ -5,8 +5,7 @@ const themedStyles = StyleService.create({
     container:{
         flex: 1,
         flexDirection: 'column',
-        maxHeight:900,
-        paddingTop:20     
+        maxHeight:"100%",
         // backgroundColor:"#FFFFFF",
     },
     Layout1:{

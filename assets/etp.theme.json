@@ -77,7 +77,7 @@
   "strict": {
   "text-basic-color": "$color-success-600",
 
-    "text-font-family": "OpenSans-Regular",
+    "text-font-family": "PublicSans",
 
     "text-heading-1-font-size": 36,
     "text-heading-1-font-weight": "800",

@@ -2,7 +2,7 @@
     "$schema": "./node_modules/@eva-design/dss/schema/schema.json",
     "version": 1.0,
     "strict": {
-      "text-font-family": "dosis-regular",
+      "text-font-family": "PublicSans",
   
       "text-heading-1-font-size": 36,
       "text-heading-1-font-weight": "800",
@@ -1723,6 +1723,47 @@
         "appearances": {
           "default": {
             "mapping": {
+              "paddingHorizontal": 0,
+              "paddingVertical": 0,
+              "borderRadius": 0,
+              "backgroundColor": "transparent",
+              "contentBorderRadius": "border-radius",
+              "contentBorderWidth": "border-width",
+              "contentBorderColor": "transparent",
+              "contentTextFontSize": "text-subtitle-1-font-size",
+              "contentTextFontWeight": "text-subtitle-1-font-weight",
+              "contentTextFontFamily": "text-subtitle-1-font-family",
+              "contentTextColor": "text-basic-color",
+              "state": {
+                "bounding": {
+                  "contentTextColor": "text-hint-color"
+                },
+                "selected": {
+                  "contentBorderColor": "color-primary-default-border",
+                  "contentBackgroundColor": "color-danger-default",
+                  "contentTextColor": "text-control-color"
+                },
+                "disabled": {
+                  "contentTextColor": "text-disabled-color"
+                },
+                "today": {
+                  "contentBorderColor": "color-primary-transparent-default-border",
+                  "contentBackgroundColor": "color-primary-transparent-default"
+                },
+                "range": {
+                  "borderRadius": "border-radius",
+                  "backgroundColor": "color-primary-default",
+                  "contentTextColor": "text-control-color"
+                },
+                "today.range": {
+                  "contentBorderColor": "color-control-transparent-default-border",
+                  "contentBackgroundColor": "color-control-transparent-default"
+                }
+              }
+            }
+          },
+          "primary": {
+             "mapping": {
               "paddingHorizontal": 0,
               "paddingVertical": 0,
               "borderRadius": 0,

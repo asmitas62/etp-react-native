@@ -3,7 +3,6 @@
     "name": "easytimepay",
     "slug": "easytimepay",
     "version": "2.0.0",
-
     "scheme": "roles-auth",
     "web": {
       "bundler": "metro",
@@ -15,21 +14,19 @@
     ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
-      "image": "./assets/time.png",
+      "image": "./assets/etp-2.png",
       "resizeMode": "adaptive",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -37,6 +34,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.asmitadev.easytimepay"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ea51ec05-6763-434e-ba2c-286bf6ec9de4"
       }
     }
   }

@@ -3,10 +3,10 @@ import React, { ComponentProps, useEffect, useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { router, useNavigation } from 'expo-router';
-import * as globalCss from "../global.css";
+import * as globalCss from "global.css";
 import { Button, IconElement, IconProps, Input, Layout, Text } from '@ui-kitten/components';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useAuth } from '~/context/AuthContext';
+import { useAuth } from './context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FooterMain from './FooterMain';
 

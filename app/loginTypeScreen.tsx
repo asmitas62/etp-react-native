@@ -1,6 +1,6 @@
 import { View, StyleSheet, Platform } from 'react-native'
 import React, { Component, useEffect } from 'react'
-import * as globalCss from "../global.css";
+import * as globalCss from "global.css";
 import { Button, Icon, Input, Layout, Text } from '@ui-kitten/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router, useNavigation } from 'expo-router';

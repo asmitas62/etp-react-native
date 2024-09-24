@@ -1,5 +1,5 @@
 import axios, { all } from 'axios';
-import { AuthModel } from '~/app/model/AuthModel';
+import { AuthModel } from '../model/AuthModel';
 import axiosInstance from './HttpInterceptor';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const qs = require('qs');
@@ -19,8 +19,8 @@ export const authorizeUser = async(authData:any) => {
 }
 
 export const fetchUserDeatils = async() =>{
-    const baseURL = await AsyncStorage.getItem('apiUrl');
-    if(baseURL){
-        return axiosInstance.get('/api/AppUser/Detail',{baseURL:"https://testapi.etpcloud.in"});
+    const baseApiURL = await AsyncStorage.getItem('apiUrl');
+    if(baseApiURL){
+        return axiosInstance.get('/api/AppUser/Detail',{baseURL:baseApiURL});
     } else return null;
 }

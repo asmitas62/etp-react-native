@@ -1,17 +1,16 @@
 import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
 import { Children, createContext, useContext, useReducer, useState } from 'react';
-import axiosInstance from '~/services/HttpInterceptor';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppUtil from '~/services/util/AppUtil';
-import { authorizeUser, fetchUserDeatils } from '~/services/Authentication.service';
+import AppUtil from '../services/util/AppUtil';
+import { authorizeUser, fetchUserDeatils } from '../services/Authentication.service';
 import { useLoader } from './LoaderContext';
-import showToast from '~/components/ToastMessage';
+import showToast from '../components/ToastMessage';
 interface AuthProps {
 	authState: { authenticated: boolean | null; username: string | null; token: string | null };
 	onLogin: (username: string, password: string, companyCode: string, domainUrl: string) => void;
 	onDomainUpdate: (username: string, password: string, companyCode: string, domainUrl: string) => void;
 	onLogout: () => void;
-	onPpersistLogin:()=>void;
+	onPersistLogin:()=>void;
 }
 
 const AuthContext = createContext<Partial<AuthProps>>({});
@@ -36,10 +35,10 @@ export const AuthProvider = ({ children }: any) => {
 		if(authState?.authenticated === null){
 		const accessToken = await AsyncStorage.getItem('accessToken');
 		const employeesData = await AsyncStorage.getItem('employeeData');
-		console.log("persist login ", authState,"data-",employeesData,accessToken);
+		console.log("persist111 login data-",employeesData,accessToken);
 		showLoader();
 		if(accessToken && employeesData){
-			console.log("persist login-- ", authState);
+			console.log("persist login-- ", authState, accessToken);
 			setAuthState({
 				authenticated: true,
 				username: employeesData,
@@ -76,7 +75,12 @@ export const AuthProvider = ({ children }: any) => {
 						if(userInfo.responseObject.httpCode === 200){	
 						console.log("userdata",userInfo.responseObject.response.firstName);
 						AsyncStorage.setItem('employeeData',userInfo.responseObject.response.firstName);
+						AsyncStorage.setItem('employeeID',userInfo.responseObject.response.employeeID.toString());
+						
 						hideLoader();
+						} else {
+							hideLoader();
+							showToast('Error',userInfo.message,'error');
 						}
 					})
 					.catch(error => {
@@ -121,7 +125,7 @@ export const AuthProvider = ({ children }: any) => {
 	const value = {
 		onLogin: login,
 		onLogout: logout,
-		onPpersistLogin:persistLogin,
+		onPersistLogin:persistLogin,
 		authState
 	};
 
